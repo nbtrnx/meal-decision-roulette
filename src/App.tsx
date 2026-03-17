@@ -13,7 +13,7 @@ function App() {
   const foodOptions: Record<MealType, string[]> = {
     Japanese: ['Ramen', 'Sushi', 'Donburi', 'Udon', 'Soba'],
     Chinese: ['Fried Rice', 'Mabo Dofu', 'Dumpling'],
-    Italian: ['Pizza', 'Pasta', 'Lazagna'],
+    Italian: ['Pizza', 'Pasta', 'Lasagna'],
     Fast: ['Burger', 'Fried Chicken', 'Hot Dog']
   };
 
