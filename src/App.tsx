@@ -2,16 +2,18 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
-  const [mealType, setMealType] = useState<string | null>(null);
+  type MealType = 'Japanese' | 'Chinese' | 'Italian' | 'Fast';
+
+  const [mealType, setMealType] = useState<MealType | null>(null);
   const [dish, setDish] = useState<string | null>(null);
   const [isChoosing, setIsChoosing] = useState(false);
 
-  const typeOptions = ['Japanese', 'Chinese', 'Italian', 'Fast'];
+  const typeOptions: MealType[] = ['Japanese', 'Chinese', 'Italian', 'Fast'];
 
-  const foodOptions: Record<string, string[]> = {
+  const foodOptions: Record<MealType, string[]> = {
     Japanese: ['Ramen', 'Sushi', 'Donburi', 'Udon', 'Soba'],
     Chinese: ['Fried Rice', 'Mabo Dofu', 'Dumpling'],
-    Italian: ['Pizza', 'Pasta', 'lazagna'],
+    Italian: ['Pizza', 'Pasta', 'Lazagna'],
     Fast: ['Burger', 'Fried Chicken', 'Hot Dog']
   };
 
@@ -20,17 +22,23 @@ function App() {
 
     setTimeout(() => {
       const randomIndex = Math.floor(typeOptions.length * Math.random());
-      setMealType(typeOptions[randomIndex]);
+      const selectedMealType = typeOptions[randomIndex];
+      if (!selectedMealType) return;
+      setMealType(selectedMealType);
       setIsChoosing(false);
     }, 1250);
   };
 
   const randomDish = () => {
+    if (!mealType) return;
+
     setIsChoosing(true);
 
     setTimeout(() => {
       const randomIndex = Math.floor(foodOptions[mealType].length * Math.random());
-      setDish(foodOptions[mealType][randomIndex]);
+      const selectedDish = foodOptions[mealType][randomIndex];
+      if (!selectedDish) return;
+      setDish(selectedDish);
       setIsChoosing(false);
     }, 1250);
   };
